@@ -139,6 +139,28 @@ let update = function(event, model) {
 
     model.state.push(newMeeting);
     }
+    else if ((findAncestor(event.target, 'remove')) || (event.target.className == "remove")){                                          // Delete task Event
+    let remove = event.target.closest('li');
+    model.state.forEach(function(meeting) {
+      if ((meeting.createdAt === remove.title) && (meeting.status = remove.id)) {
+        console.log("in delete area of update, removing ", meeting);
+        let i = model.state.indexOf(meeting);
+        model.state.splice(i, 1);
+      }
+    });
+  }
+  else if ((findAncestor(event.target, 'past')) || (event.target.className == "markpast")) {                                          // Delete task Event
+    let past = event.target.closest('li');
+    model.state.forEach(function(meeting) {
+      if ((meeting.createdAt === past.title) && (meeting.status = past.id)) {
+        console.log("in complete area of update, marking as past ", meeting);
+        if (meeting.status == "upcoming")
+          meeting.status = "past";
+        else
+          meeting.status = "upcoming";
+      }
+    });
+  }
   console.log("leaving update with model.state= ", model.state);
   return model;
 }
@@ -208,6 +230,21 @@ let view = function(model, listener, className) {
 
     if ((meeting.times.sunday.start != '') | (meeting.times.sunday.end != ''))
       listContents.appendChild(createDay(meeting.times.sunday, 'sunday'));
+
+    var remove = document.createElement('button');
+    remove.className = "remove";
+    remove.innerHTML = "Remove";
+    remove.addEventListener('click', listener);
+    listContents.appendChild(remove);
+
+    var past = document.createElement('button');
+    past.className = "markpast";
+    if (meeting.status == "upcoming")
+      past.innerHTML = "Mark as past";
+    else
+      past.innerHTML = "Mark as upcoming";
+    past.addEventListener('click', listener);
+    listContents.appendChild(past);
 
     li.appendChild(listContents);
     ul.appendChild(li);

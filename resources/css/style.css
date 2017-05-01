@@ -158,6 +158,16 @@ ul {
   margin: 5;
 }
 
+.remove {
+  width: 100%;
+  margin: 5;
+}
+
+.markpast {
+  width: 100%;
+  margin: 5;
+}
+
 .times {
   flex-grow: 1:
   text-align: left;
@@ -213,6 +223,34 @@ ul {
 }
 
 .submit:hover {
+  background-color: #661e31;
+
+}
+
+.remove {
+  background-color: #932f4a;
+  border-style: none;
+  border-radius: 5px 5px 5px 5px;
+  height: 30px;
+  font-size: 105%;
+  color: white;
+}
+
+.remove:hover {
+  background-color: #661e31;
+
+}
+
+.markpast {
+  background-color: #932f4a;
+  border-style: none;
+  border-radius: 5px 5px 5px 5px;
+  height: 30px;
+  font-size: 105%;
+  color: white;
+}
+
+.markpast:hover {
   background-color: #661e31;
 
 }
